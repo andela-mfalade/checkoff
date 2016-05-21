@@ -1,0 +1,51 @@
+/* Content Area. */
+body {
+    font-family: 'Lucida Grande';
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+body p {
+    font-size: 12px;
+}
+
+#sidenav {
+    width: 116px;
+    background: #333745;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    color: #F8F8F8;
+    font-size: 25px;
+}
+
+#sidenav a {
+    color: #F8F8F8;
+}
+
+#main {
+    text-align: center;
+    padding: 20px;
+    padding-top: 120px;
+    position: absolute;
+    left: 150px;
+    right: 0;
+}
+
+
+/* Area contents */
+#sidenav ul {
+    padding: 0;
+}
+
+#sidenav ul li {
+    list-style: none;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #2C2F3B;
+}
+
+#sidenav ul li:hover {
+    background: #3D414E;
+}

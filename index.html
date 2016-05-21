@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Checkoff</title>
+    <link rel="stylesheet" href="./assets/css/base.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./assets/css/photon.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./assets/css/custom.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+    <script>var $ = jQuery = require("jquery")</script>
+
+  </head>
+  <body>
+    <div id="sidenav" class="float_left">
+        <ul>
+            <li id="home"><a href="#"><i class="icon icon-home" aria-hidden="true"></i></a></li>
+            <li id="addNew"><a href="#"><span class="icon icon-plus-circled"></span></a></li>
+            <li id="search"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+            <li id="favs"><a href="#"><span class="icon icon-star"></span></a></li>
+            <li id="preferences"><a href="#"><span class="icon icon-cog"></span></a></li>
+            <li id="trash"><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+        </ul>
+    </div>
+
+    <!-- Dynamic template gets injected here. -->
+    <div id="main" class="float_left"></div>
+
+
+  </body>
+
+  <script>
+    require('./renderer.js')
+  </script>
+  <script>
+    var app = require("./lib/app");
+    app.on("rendered",  function(rendered) {
+      $("#main").html(rendered)
+    });
+    $(function() {
+      app.emit("view-selected", "home");
+      $("#search").on('click', function() {
+        app.emit("view-selected", "search");
+      })
+      $("#home").on('click', function() {
+        app.emit("view-selected", "home");
+      })
+    });
+
+  </script>
+</html>
