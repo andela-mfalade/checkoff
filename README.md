@@ -29,10 +29,17 @@ Well, here is a tool to help you better manage your life/studies.
 
 Get started by executing the following commands in your terminal.
 
+Clone this repository locally.
 ```
 git clone https://github.com/andela-mfalade/checkoff
+```
 
- npm install
+Install app dependencies.
+```
+npm install
+```
 
+Launch app.
+```
 npm start
 ```
