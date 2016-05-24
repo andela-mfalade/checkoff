@@ -11,7 +11,7 @@ body p {
 }
 
 #sidenav {
-    width: 116px;
+    width: 87px;
     background: #333745;
     position: absolute;
     top: 0;
@@ -26,10 +26,8 @@ body p {
 
 #main {
     text-align: center;
-    padding: 20px;
-    padding-top: 120px;
     position: absolute;
-    left: 150px;
+    left: 87px;
     right: 0;
 }
 
@@ -49,3 +47,18 @@ body p {
 #sidenav ul li:hover {
     background: #3D414E;
 }
+
+/* Tasks page layout */
+#tasks_nav {
+    position: absolute;
+    overflow-y: scroll;
+    width: 228px;
+    height: 100vh;
+    background: #F1F2F5;
+}
+
+.task_desc {
+    position: absolute;
+    left: 315px;
+}
+
