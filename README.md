@@ -2,8 +2,6 @@
 A Desktop Books Reader, Note Taker and Task Management App running on a Node Environment built with Electron, Photon, Jade and Jquery
 
 
----
-
 ## Intro
 If you are like me, you have found yourself downloading 10, 20, maybe a 100 e-books on your computer with the hopes of reading them later.
 
@@ -14,7 +12,6 @@ Sometimes, you start one book and along the way, you pick up another and totally
 Well, here is a tool to help you better manage your life/studies.
 
 
----
 
 ## What Checkoff Offers
 - E-book reader
