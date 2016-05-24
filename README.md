@@ -29,7 +29,8 @@ Well, here is a tool to help you better manage your life/studies.
 
 Get started by executing the following commands in your terminal.
 
-```git clone https://github.com/andela-mfalade/checkoff
+```
+git clone https://github.com/andela-mfalade/checkoff
 
  npm install
 
