@@ -5,3 +5,27 @@ body p {
 .float_left {
     float: left;
 }
+
+.list-group-header {
+    padding-top: 40px;
+}
+
+.list-group-item:hover {
+    background: #F1F2F5;
+    border-radius: 4px;
+}
+
+.list-group-item {
+    border: 1px solid #ddd;
+    background: #FFFFFF;
+    margin: 10px 20px;
+    border-radius: 4px;
+}
+
+hr {
+    margin: 10px auto;
+}
+#searchForm {
+    margin-top: 30px;
+    padding: 0 10px;
+}

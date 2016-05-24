@@ -28,7 +28,11 @@
   },
   "dependencies": {
     "electron-reload": "^0.3.0",
-    "handlebars": "^4.0.5",
-    "jquery": "^2.2.4"
+    "gray-matter": "^2.0.2",
+    "jade": "^1.11.0",
+    "jquery": "^2.2.4",
+    "lunr": "^0.7.1",
+    "showdown": "^1.4.1",
+    "underscore": "^1.8.3"
   }
 }

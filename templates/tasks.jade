@@ -1,0 +1,58 @@
+div(id="tasks_nav", class="float_left")
+    form#searchForm
+        input(class="form-control" id="searchBox" type="text" placeholder="Search for task.")
+        hr(style=" margin-top: 20px;")
+
+    ul.list-group.taskList
+
+div(id="task", class="task_desc")
+    h2#title
+    p#task_description
+
+    div#searchResults
+
+
+script.
+    var appEngine = require('./lib/app');
+    var app = appEngine.start();
+    var showTask = function( id ) {
+        app.emit( "task-selected", id );
+    }
+
+    var updateLinks = function( contents ){
+        $(".list-group-item").remove();
+        contents.forEach( function(content) {
+            console.log(content);
+            var res = '<li class="list-group-item task_item" id="' + content.id + '"><div class="media-body"><strong>' + content.title + '</strong><p>List description</p></div></li>';
+            $(".taskList").append(res)
+        })
+    }
+
+    app.on("task-rendered", function( task ) {
+        $( '#title' ).html( task.title );
+        $( '#task_description' ).html( task.body );
+    });
+
+     app.on("search-completed", function( response ) {
+        updateLinks( response )
+    });
+
+    $( function() {
+        showTask( 'task-01' );
+        var allTasks = appEngine.loadTasks();
+        updateLinks(allTasks);
+
+        //- ---------- - - - 
+        $( ".taskList" ).on( "click", '.task_item', function() {
+            console.log("click event registered")
+            showTask( this.id );
+        });
+        //- -------- -  -  - 
+
+        $('#searchForm').on("submit", function(event) {
+            event.preventDefault();
+            app.emit("search-requested", $('#searchBox').val());
+        })
+    } );
+ 
+    
