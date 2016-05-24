@@ -1,4 +1,4 @@
-# checkoff
+# checkoff [WIP]
 A Desktop Books Reader, Note Taker and Task Management App running on a Node Environment built with Electron, Photon, Jade and Jquery
 
 
@@ -27,13 +27,11 @@ Well, here is a tool to help you better manage your life/studies.
 
 ## Installation
 
-Clone this repository by running
+Get started by executing the following commands in your terminal.
 
 ```git clone https://github.com/andela-mfalade/checkoff
+
+ npm install
+
+npm start
 ```
-
-Run ``` npm install 
-``` to install app dependencies.
-
-Run ``` npm start
-``` to launch app.
