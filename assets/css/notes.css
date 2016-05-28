@@ -1,0 +1,35 @@
+/* Custome styling for notes page*/
+
+#notesPage {
+    padding: 15px 20px;
+}
+#noteForm {
+    width: 75%;
+    margin: 24px auto;
+}
+
+#noteForm .form-group {
+    text-align: left;
+}
+
+#noteForm input, #noteForm textarea {
+    border: 1px dotted #CCCACC;
+    -webkit-transition: border .5s
+}
+
+#noteForm input:hover, #noteForm textarea:hover {
+    border: 1px dotted rgb(51, 55, 69);
+}
+
+#noteForm input:focus, #noteForm textarea:focus {
+    border: 1px solid #48CFAD;
+    outline: none;
+}
+
+
+/* Cuxsomt styling for home page */
+#homePage {
+    padding: 130px;
+    position: relative;
+    top: 30px;
+} 

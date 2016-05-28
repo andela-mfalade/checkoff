@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./assets/css/base.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="./assets/css/photon.min.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="./assets/css/custom.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./assets/css/notes.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
     <script>var $ = jQuery = require("jquery")</script>
   </head>
@@ -13,10 +14,11 @@
 
   <body>
     <div id="sidenav" class="float_left">
-        <ul>
+        <ul class="navHolder">
             <li id="home" class="nav"><a href="#"><i class="icon icon-home" aria-hidden="true"></i></a></li>
-            <li id="addNew" class="nav"><a href="#"><span class="icon icon-plus-circled"></span></a></li>
-            <li id="search" class="nav"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+            <li id="notes" class="nav"><a href="#" class="activePage"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+            <li id="books" class="nav"><a href="#"><span class="icon icon-book-open"></span></a></li>
+            <li id="codeSnippet" class="nav"><a href="#"><span class="icon icon-code"></span></a></li>
             <li id="tasks" class="nav"><a href="#"><span class="icon icon-star"></span></a></li>
             <li id="preferences" class="nav"><a href="#"><span class="icon icon-cog"></span></a></li>
             <li id="trash" class="nav"><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
@@ -41,8 +43,10 @@
       app.emit("view-selected", viewName);
     };
     $(function() {
-      loadView("tasks");
-      $(".nav").on('click', function(event) {
+      loadView("notes");
+      $(".navHolder").on('click', '.nav', function(event) {
+        $(".navHolder").find("a").removeClass('activePage');
+        $(this).find("a").addClass('activePage');
         loadView(this.id);
       });
     });

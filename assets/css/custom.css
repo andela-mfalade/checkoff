@@ -1,3 +1,7 @@
+body {
+    color: #3E4046;
+}
+
 body p {
     font-size: 14px;
 }
@@ -6,13 +10,26 @@ body p {
     float: left;
 }
 
-.list-group-header {
-    padding-top: 40px;
+hr {
+    margin: 10px auto;
+}
+#searchForm {
+    margin-top: 30px;
+    padding: 0 10px;
 }
 
-.list-group-item:hover {
-    background: #F1F2F5;
-    border-radius: 4px;
+/* -- -- -- List Group Related Stylings -- -- --*/
+.list-group p {
+    font-size: 12px;
+    color: #616468;
+}
+
+.list-group {
+    padding-top: 10px;
+}
+
+.list-group-header {
+    padding-top: 40px;
 }
 
 .list-group-item {
@@ -20,12 +37,19 @@ body p {
     background: #FFFFFF;
     margin: 10px 20px;
     border-radius: 4px;
+    color: #3E4046;
+    text-align: left;
 }
 
-hr {
-    margin: 10px auto;
+.list-group-item:first-child {
+    border: 1px solid #ddd;
 }
-#searchForm {
-    margin-top: 30px;
-    padding: 0 10px;
+
+.list-group-item:hover {
+    background: #F1F2F5;
+    border-radius: 4px;
+}
+
+.form-control:focus {
+    box-shadow: none;
 }

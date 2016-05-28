@@ -1,0 +1,19 @@
+#notesPage
+    #noteForm
+        h4 Drop A Note...
+        br
+        form
+            .form-group
+                label Note Title
+                input(type="text" class="form-control" placeholder="My super cool note.")
+            .form-group
+                label Note
+                textarea(class="form-control" rows="10")
+
+script.
+    var notesApp = require('./lib/notes');
+
+    $(function() {
+        notesApp();
+    })
+
