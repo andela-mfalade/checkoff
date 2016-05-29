@@ -2,18 +2,54 @@
     #noteForm
         h4 Drop A Note...
         br
-        form
+        form#noteForm
+            p#savedNotification Saved...
             .form-group
                 label Note Title
-                input(type="text" class="form-control" placeholder="My super cool note.")
+                input(type="text" id="noteTitle" class="form-control" placeholder="My super cool note.")
             .form-group
                 label Note
-                textarea(class="form-control" rows="10")
+                textarea(class="form-control"  id="noteContent" rows="10")
 
 script.
     var notesApp = require('./lib/notes');
+    var typingTimer;
+    var timeToSave = 2000;
+    var $noteForm = $('#noteForm');
+    var $titleForm = $('#noteTitle');
+    var $contentForm = $('#noteContent');
+
+    //- Listeners
+    $titleForm.on('keyup', saveOnTimeout);
+    $contentForm.on('keyup', saveOnTimeout);
+    $titleForm.on('keydown', clearSaveTimeout);
+    $contentForm.on('keydown', clearSaveTimeout);
+    $noteForm.on('submit', function(ev) {
+        ev.preventDefault();
+        saveNote();
+    });
+
+    //- Handlers
+    function saveOnTimeout() {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(saveNote, timeToSave);
+    }
+
+    function clearSaveTimeout() {
+        clearTimeout(typingTimer);
+    }
+
+    function saveNote(){
+        var content = {
+            'title': $titleForm .val(),
+            'content': $contentForm.val()
+        };
+        notesApp.emit('save-requested', content);
+        new Notification(content.title, {body: content.body});
+        $('#savedNotification').fadeIn(1000).delay(3000).fadeOut(600);
+    }
 
     $(function() {
-        notesApp();
-    })
+        $('#savedNotification').hide();
+    });
 

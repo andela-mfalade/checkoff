@@ -4,7 +4,7 @@
     padding: 15px 20px;
 }
 #noteForm {
-    width: 75%;
+    width: 80%;
     margin: 24px auto;
 }
 
@@ -26,10 +26,22 @@
     outline: none;
 }
 
-
-/* Cuxsomt styling for home page */
 #homePage {
     padding: 130px;
     position: relative;
     top: 30px;
 } 
+
+#savedNotification {
+    position: absolute;
+    right: 20%;
+    color: #B8B6B8;
+    font-size: 12px;
+    top: 110px;
+}
+
+#noteTitle {
+    color: #333745;
+    font-size: 14px;
+    font-weight: bold;
+}
