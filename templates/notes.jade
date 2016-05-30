@@ -20,6 +20,7 @@ script.
     var typingTimer;
     var noteContent = {};
     var timeToSave = 2000;
+    var activeNoteId = null;
     var $noteItem = $('.noteItem')
     var $noteForm = $('#noteForm');
     var $notesList = $('.notesList');
@@ -27,14 +28,14 @@ script.
 
     //- Listeners
     notesApp.on('note-saved', assignNoteId);
-    $contentForm.on('keyup', saveOnTimeout);
+    $contentForm.on('keyup', saveNote);
     notesApp.on('note-delivered', renderNote);
     $notesList.on('click', '.noteItem', getNote);
     $contentForm.on('keydown', clearSaveTimeout);
     notesApp.on('notes-delivered', renderAllNotes);
     $noteForm.on('submit', function(ev) {
         ev.preventDefault();
-        saveNote();
+        saveOnTimeout();
     });
 
     //- Handlers
@@ -45,11 +46,12 @@ script.
 
     function renderNote(note) {
         $('#noteContent').val(note.rows[0].body);
+        activeNoteId = note.rows[0].id;
     }
 
-    function saveOnTimeout() {
+    function saveNote() {
         clearTimeout(typingTimer);
-        typingTimer = setTimeout(saveNote, timeToSave);
+        typingTimer = setTimeout(saveOnTimeout, timeToSave);
     }
 
     function clearSaveTimeout() {
@@ -58,6 +60,7 @@ script.
 
     function assignNoteId(id) {
         noteContent.id = id;
+        activeNoteId = id;
     }
 
     function renderAllNotes(notes) {
@@ -70,12 +73,12 @@ script.
         });
     }
 
-    function saveNote(){
+    function saveOnTimeout(){
         noteContent.body = $contentForm.val();
+        noteContent.id = activeNoteId;
         notesApp.emit('save-requested', noteContent);
         //- new Notification(noteContent.title, {body: noteContent.body});
         $('#savedNotification').fadeIn(1000).delay(3000).fadeOut(600);
-        //- notesApp.emit('notes-requested');
     }
 
     $(function() {
