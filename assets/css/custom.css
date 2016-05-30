@@ -24,12 +24,8 @@ hr {
     color: #616468;
 }
 
-.list-group {
-    padding-top: 10px;
-}
-
 .list-group-header {
-    padding-top: 40px;
+    padding: 19px 20px;
 }
 
 .list-group-item {

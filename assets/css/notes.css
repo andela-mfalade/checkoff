@@ -1,29 +1,39 @@
 /* Custome styling for notes page*/
 
-#notesPage {
-    padding: 15px 20px;
+#noteListings {
+    width: 283px;
+    background: #eee;
+    position: absolute;
+    height: 100vh;
+    overflow: scroll;
 }
-#noteForm {
-    width: 80%;
-    margin: 24px auto;
+
+#noteFormArea {
+    width: 606px    ;
+    position: absolute;
+    left: 283px;
+    height: 100vh;
 }
 
 #noteForm .form-group {
     text-align: left;
 }
 
-#noteForm input, #noteForm textarea {
-    border: 1px dotted #CCCACC;
+#rightColHeader {
+    text-align: left;
+    border-bottom: 1px dotted #eee;
+    padding: 27px;
+}
+
+#noteForm {
+    padding: 30px 20px;
+}
+
+#noteForm textarea {
+    border: none;
+    height: 360px;
+    font-size: 14px;
     -webkit-transition: border .5s
-}
-
-#noteForm input:hover, #noteForm textarea:hover {
-    border: 1px dotted rgb(51, 55, 69);
-}
-
-#noteForm input:focus, #noteForm textarea:focus {
-    border: 1px solid #48CFAD;
-    outline: none;
 }
 
 #homePage {
@@ -32,16 +42,62 @@
     top: 30px;
 } 
 
-#savedNotification {
-    position: absolute;
-    right: 20%;
-    color: #B8B6B8;
-    font-size: 12px;
-    top: 110px;
+.notesListHeader {
+    padding: 20px;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 87px;
+    z-index: 9999;
+    width: 283px;
+    height: 86px;
+    background: #eee;
+    border-bottom: 1px dotted #DDD;
+    display: flex;
+    justify-content: center;
 }
 
-#noteTitle {
-    color: #333745;
-    font-size: 14px;
+.notesListHeader h4, .notesListHeader i {
+    float: left;
+    align-self: center;
+}
+
+.notesListHeader i {
+    color: #48CFAD;
+    border: 1px dotted #ddd;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+
+.notesListHeader i:hover {
+    border: 1px dotted #48CFAD;
+} 
+
+.notesListHeader h4 {
+    margin: 0;
+}
+
+.notesListbody {
+    margin-top: 105px;
+    margin-bottom: 200px;
+    overflow: scroll;
+}
+
+#savedNotification {
+    position: absolute;
+    left: 5%;
+    color: #B8B6B8;
+    font-size: 12px;
+    top: 85px;
+}
+
+
+.addNoteIcon {
+    font-size: 30px!important;
+    margin-left: auto;
+}
+
+.addNoteIcon span{
+    font-size: 12px;
     font-weight: bold;
 }

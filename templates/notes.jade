@@ -1,35 +1,52 @@
 #notesPage
-    #noteForm
-        h4 Drop A Note...
-        br
+    #noteListings
+        .notesListHeader
+            h4 Notes
+            i(class="icon icon-plus-squared addNoteIcon", aria-hidden="true") 
+        .notesListbody
+            ul.list-group.float_left.notesList
+
+    #noteFormArea
+        #rightColHeader
+            input(class="form-control" type="text" placeholder="Search for note")
+
         form#noteForm
             p#savedNotification Saved...
             .form-group
-                label Note Title
-                input(type="text" id="noteTitle" class="form-control" placeholder="My super cool note.")
-            .form-group
-                label Note
                 textarea(class="form-control"  id="noteContent" rows="10")
 
 script.
     var notesApp = require('./lib/notes');
     var typingTimer;
+    var noteContent = {};
     var timeToSave = 2000;
+    var $noteItem = $('.noteItem')
     var $noteForm = $('#noteForm');
-    var $titleForm = $('#noteTitle');
+    var $notesList = $('.notesList');
     var $contentForm = $('#noteContent');
 
     //- Listeners
-    $titleForm.on('keyup', saveOnTimeout);
+    notesApp.on('note-saved', assignNoteId);
     $contentForm.on('keyup', saveOnTimeout);
-    $titleForm.on('keydown', clearSaveTimeout);
+    notesApp.on('note-delivered', renderNote);
+    $notesList.on('click', '.noteItem', getNote);
     $contentForm.on('keydown', clearSaveTimeout);
+    notesApp.on('notes-delivered', renderAllNotes);
     $noteForm.on('submit', function(ev) {
         ev.preventDefault();
         saveNote();
     });
 
     //- Handlers
+    function getNote() {
+        var noteId = $(this)[0].id;
+        notesApp.emit('note-requested', noteId);
+    }
+
+    function renderNote(note) {
+        $('#noteContent').val(note.rows[0].body);
+    }
+
     function saveOnTimeout() {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(saveNote, timeToSave);
@@ -39,17 +56,30 @@ script.
         clearTimeout(typingTimer);
     }
 
+    function assignNoteId(id) {
+        noteContent.id = id;
+    }
+
+    function renderAllNotes(notes) {
+        var allNotes = notes.rows;
+        allNotes.forEach(function(note) {
+            var noteTitle = note.body;
+            var noteBody = note.body;
+            var noteItem = "<li class='list-group-item noteItem' id='" + note.id + "'><div class='media-body'><strong>" + noteTitle + "</strong><p>" + noteBody + "</p></div></li>";
+            $notesList.append(noteItem);
+        });
+    }
+
     function saveNote(){
-        var content = {
-            'title': $titleForm .val(),
-            'content': $contentForm.val()
-        };
-        notesApp.emit('save-requested', content);
-        new Notification(content.title, {body: content.body});
+        noteContent.body = $contentForm.val();
+        notesApp.emit('save-requested', noteContent);
+        //- new Notification(noteContent.title, {body: noteContent.body});
         $('#savedNotification').fadeIn(1000).delay(3000).fadeOut(600);
+        //- notesApp.emit('notes-requested');
     }
 
     $(function() {
         $('#savedNotification').hide();
+        notesApp.emit('notes-requested');
     });
 
