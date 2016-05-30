@@ -5,9 +5,10 @@ div(id="tasks_nav", class="float_left")
 
     ul.list-group.taskList
 
-div(id="task", class="task_desc")
-    h2#title
-    p#task_description
+div(id="task", class="task_page")
+    .desc_holder
+        h2#title
+        p#task_description
 
     div#searchResults
 
@@ -22,8 +23,7 @@ script.
     var updateLinks = function( contents ){
         $(".list-group-item").remove();
         contents.forEach( function(content) {
-            console.log(content);
-            var res = '<li class="list-group-item task_item" id="' + content.id + '"><div class="media-body"><strong>' + content.title + '</strong><p>List description</p></div></li>';
+            var res = '<li class="list-group-item task_item" id="' + content.id + '"><div class="media-body"><h6>' + content.title + '</h6><p>' + content.body + '</p></div></li>';
             $(".taskList").append(res)
         })
     }
@@ -44,7 +44,6 @@ script.
 
         //- ---------- - - - 
         $( ".taskList" ).on( "click", '.task_item', function() {
-            console.log("click event registered")
             showTask( this.id );
         });
         //- -------- -  -  - 

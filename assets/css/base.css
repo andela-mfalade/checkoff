@@ -57,8 +57,14 @@ body p {
     background: #F1F2F5;
 }
 
-.task_desc {
+.task_page {
     position: absolute;
-    left: 315px;
+    left: 228px;
+    width: 100%;
+    text-align: left;
+    padding: 0 50px;
 }
 
+.activePage {
+    color: #48CFAD!important;
+}
