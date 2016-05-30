@@ -20,25 +20,40 @@ script.
     var typingTimer;
     var noteContent = {};
     var timeToSave = 2000;
+    var globalNotes = null;
     var activeNoteId = null;
     var $noteItem = $('.noteItem')
     var $noteForm = $('#noteForm');
     var $notesList = $('.notesList');
     var $contentForm = $('#noteContent');
+    var $newNoteButton = $('.addNoteIcon');
 
     //- Listeners
-    notesApp.on('note-saved', assignNoteId);
     $contentForm.on('keyup', saveNote);
+    notesApp.on('note-saved', assignNoteId);
     notesApp.on('note-delivered', renderNote);
+    $newNoteButton.on('click', createNewNote);
+    notesApp.on('note-deleted', createNewNote);
     $notesList.on('click', '.noteItem', getNote);
     $contentForm.on('keydown', clearSaveTimeout);
-    notesApp.on('notes-delivered', renderAllNotes);
+    notesApp.on('notes-delivered', updateGlobalNotes);
     $noteForm.on('submit', function(ev) {
         ev.preventDefault();
         saveOnTimeout();
     });
 
     //- Handlers
+    function updateNotesList() {
+        var allNotes = globalNotes.rows;
+        $notesList.empty();
+        allNotes.forEach(function(note) {
+            var noteTitle = note.body;
+            var noteBody = note.body;
+            var noteItem = "<li class='list-group-item noteItem' id='" + note.id + "'><div class='media-body'><strong>" + noteTitle + "</strong><p>" + noteBody + "</p></div></li>";
+            $notesList.append(noteItem);
+        });
+    }
+
     function getNote() {
         var noteId = $(this)[0].id;
         notesApp.emit('note-requested', noteId);
@@ -54,6 +69,11 @@ script.
         typingTimer = setTimeout(saveOnTimeout, timeToSave);
     }
 
+    function createNewNote() {
+        activeNoteId = null;
+        $('#noteContent').val('');
+    }
+
     function clearSaveTimeout() {
         clearTimeout(typingTimer);
     }
@@ -63,26 +83,25 @@ script.
         activeNoteId = id;
     }
 
-    function renderAllNotes(notes) {
-        var allNotes = notes.rows;
-        allNotes.forEach(function(note) {
-            var noteTitle = note.body;
-            var noteBody = note.body;
-            var noteItem = "<li class='list-group-item noteItem' id='" + note.id + "'><div class='media-body'><strong>" + noteTitle + "</strong><p>" + noteBody + "</p></div></li>";
-            $notesList.append(noteItem);
-        });
+    function updateGlobalNotes(notes) {
+        globalNotes = notes;
+        updateNotesList();
     }
 
-    function saveOnTimeout(){
+    function fetchAndRefreshGlobalNotes() {
+        notesApp.emit('notes-requested');
+    }
+
+    function saveOnTimeout() {
         noteContent.body = $contentForm.val();
         noteContent.id = activeNoteId;
-        notesApp.emit('save-requested', noteContent);
-        //- new Notification(noteContent.title, {body: noteContent.body});
+        notesApp.emit('save-requested', noteContent)
         $('#savedNotification').fadeIn(1000).delay(3000).fadeOut(600);
+        fetchAndRefreshGlobalNotes();
     }
 
     $(function() {
         $('#savedNotification').hide();
-        notesApp.emit('notes-requested');
+        fetchAndRefreshGlobalNotes();
     });
 
