@@ -9,7 +9,7 @@
 }
 
 #noteFormArea {
-    width: 606px    ;
+    width: 606px;
     position: absolute;
     left: 283px;
     height: 100vh;
@@ -31,9 +31,11 @@
 
 #noteForm textarea {
     border: none;
-    height: 360px;
+    height: 80vh;
     font-size: 14px;
-    -webkit-transition: border .5s
+    -webkit-transition: border .5s;
+    font-weight: 300;
+    line-height: 1.4em;
 }
 
 #homePage {
@@ -100,4 +102,8 @@
 .addNoteIcon span{
     font-size: 12px;
     font-weight: bold;
+}
+
+.fav {
+    font-size: 14px;
 }

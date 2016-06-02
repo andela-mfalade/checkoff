@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <title>Checkoff</title>
     <link rel="stylesheet" href="./assets/css/base.css" media="screen" title="no title" charset="utf-8">
@@ -8,11 +9,12 @@
     <link rel="stylesheet" href="./assets/css/custom.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="./assets/css/notes.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
-    <script>var $ = jQuery = require("jquery")</script>
-  </head>
+    <script>
+        var $ = jQuery = require("jquery")
+    </script>
+</head>
 
-
-  <body>
+<body>
     <div id="sidenav" class="float_left">
         <ul class="navHolder">
             <li id="home" class="nav"><a href="#"><i class="icon icon-home" aria-hidden="true"></i></a></li>
@@ -20,36 +22,17 @@
             <li id="books" class="nav"><a href="#"><span class="icon icon-book-open"></span></a></li>
             <li id="codeSnippet" class="nav"><a href="#"><span class="icon icon-code"></span></a></li>
             <li id="tasks" class="nav"><a href="#"><span class="icon icon-star"></span></a></li>
+            <li id="tasks" class="nav"><a href="#"><span class="icon icon-calendar"></span></a></li>
             <li id="preferences" class="nav"><a href="#"><span class="icon icon-cog"></span></a></li>
             <li id="trash" class="nav"><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
         </ul>
     </div>
-
     <!-- Dynamic template gets injected here. -->
     <div id="main" class="float_left"></div>
+    
+    <script>
+        require('./renderer.js')
+    </script>
+</body>
 
-
-  </body>
-  <script>
-    require('./renderer.js')
-  </script>
-  <script>
-    var appEngine = require("./lib/app");
-    var app = appEngine.start();
-    app.on("rendered",  function(rendered) {
-      $("#main").html(rendered)
-    });
-    var loadView = function(viewName) {
-      app.emit("view-selected", viewName);
-    };
-    $(function() {
-      loadView("notes");
-      $(".navHolder").on('click', '.nav', function(event) {
-        $(".navHolder").find("a").removeClass('activePage');
-        $(this).find("a").addClass('activePage');
-        loadView(this.id);
-      });
-    });
-
-  </script>
 </html>

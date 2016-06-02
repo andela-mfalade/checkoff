@@ -2,6 +2,7 @@
     #noteListings
         .notesListHeader
             h4 Notes
+                span.badge
             i(class="icon icon-plus-squared addNoteIcon", aria-hidden="true") 
         .notesListbody
             ul.list-group.float_left.notesList
@@ -16,92 +17,5 @@
                 textarea(class="form-control"  id="noteContent" rows="10")
 
 script.
-    var notesApp = require('./lib/notes');
-    var typingTimer;
-    var noteContent = {};
-    var timeToSave = 2000;
-    var globalNotes = null;
-    var activeNoteId = null;
-    var $noteItem = $('.noteItem')
-    var $noteForm = $('#noteForm');
-    var $notesList = $('.notesList');
-    var $contentForm = $('#noteContent');
-    var $newNoteButton = $('.addNoteIcon');
-
-    //- Listeners
-    $contentForm.on('keyup', saveNote);
-    notesApp.on('note-saved', assignNoteId);
-    notesApp.on('note-delivered', renderNote);
-    $newNoteButton.on('click', createNewNote);
-    notesApp.on('note-deleted', createNewNote);
-    $notesList.on('click', '.noteItem', getNote);
-    $contentForm.on('keydown', clearSaveTimeout);
-    notesApp.on('notes-delivered', updateGlobalNotes);
-    $noteForm.on('submit', function(ev) {
-        ev.preventDefault();
-        saveOnTimeout();
-    });
-
-    //- Handlers
-    function updateNotesList() {
-        var allNotes = globalNotes.rows;
-        $notesList.empty();
-        allNotes.forEach(function(note) {
-            var noteTitle = note.body;
-            var noteBody = note.body;
-            var noteItem = "<li class='list-group-item noteItem' id='" + note.id + "'><div class='media-body'><strong>" + noteTitle + "</strong><p>" + noteBody + "</p></div></li>";
-            $notesList.append(noteItem);
-        });
-    }
-
-    function getNote() {
-        var noteId = $(this)[0].id;
-        notesApp.emit('note-requested', noteId);
-    }
-
-    function renderNote(note) {
-        $('#noteContent').val(note.rows[0].body);
-        activeNoteId = note.rows[0].id;
-    }
-
-    function saveNote() {
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(saveOnTimeout, timeToSave);
-    }
-
-    function createNewNote() {
-        activeNoteId = null;
-        $('#noteContent').val('');
-    }
-
-    function clearSaveTimeout() {
-        clearTimeout(typingTimer);
-    }
-
-    function assignNoteId(id) {
-        noteContent.id = id;
-        activeNoteId = id;
-    }
-
-    function updateGlobalNotes(notes) {
-        globalNotes = notes;
-        updateNotesList();
-    }
-
-    function fetchAndRefreshGlobalNotes() {
-        notesApp.emit('notes-requested');
-    }
-
-    function saveOnTimeout() {
-        noteContent.body = $contentForm.val();
-        noteContent.id = activeNoteId;
-        notesApp.emit('save-requested', noteContent)
-        $('#savedNotification').fadeIn(1000).delay(3000).fadeOut(600);
-        fetchAndRefreshGlobalNotes();
-    }
-
-    $(function() {
-        $('#savedNotification').hide();
-        fetchAndRefreshGlobalNotes();
-    });
-
+    appInit = require('./lib/notes/notesController');
+    appInit();
