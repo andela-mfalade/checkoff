@@ -8,10 +8,7 @@
     <link rel="stylesheet" href="./assets/css/photon.min.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="./assets/css/custom.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="./assets/css/notes.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
-    <script>
-        var $ = jQuery = require("jquery")
-    </script>
+    <script>var $ = jQuery = require("jquery")</script>
 </head>
 
 <body>
@@ -24,15 +21,13 @@
             <li id="tasks" class="nav"><a href="#"><span class="icon icon-star"></span></a></li>
             <li id="tasks" class="nav"><a href="#"><span class="icon icon-calendar"></span></a></li>
             <li id="preferences" class="nav"><a href="#"><span class="icon icon-cog"></span></a></li>
-            <li id="trash" class="nav"><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+            <li id="trash" class="nav"><a href="#"><i class="icon icon-trash"></i></a></li>
         </ul>
     </div>
-    <!-- Dynamic template gets injected here. -->
+    <!-- Dynamic templates get injected here. -->
     <div id="main" class="float_left"></div>
-    
-    <script>
-        require('./renderer.js')
-    </script>
+
+    <script>require('./renderer.js')</script>
 </body>
 
 </html>
